@@ -5,3 +5,7 @@
    2. A website (the front-end) that shows the final product to everybody: static and dynamic
    3. A database or files that store data (data = objects)
    4. n API that provides a communication interface between the front-end and your data (retrieve, create, delete, update them)
+
+   ## how to start it
+   .console.py
+   
