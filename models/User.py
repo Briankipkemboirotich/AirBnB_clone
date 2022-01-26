@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """This module defines a User class f"""
-from models.BaseModel import BaseModel
+from models.base_model import BaseModel
 
 
 class User(BaseModel):

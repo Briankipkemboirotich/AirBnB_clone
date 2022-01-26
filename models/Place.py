@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """This module defines a Place class f"""
-from models.BaseModel import BaseModel
+from models.base_model import BaseModel
 
 
 class Place(BaseModel):
