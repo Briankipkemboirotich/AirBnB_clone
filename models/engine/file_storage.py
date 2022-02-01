@@ -39,3 +39,13 @@ class FileStorage:
 
         with open(FileStorage.__file_path, "r") as f:
             FileStorage.__objects = json.loads(f.read())
+    
+    def delete(self, obj=None):
+        ''' deletes the object obj from the attribute
+            __objects if it's inside it
+        '''
+        if obj is None:
+            return
+        if obj in self.__objects.keys():
+            del self.__objects[obj]
+
