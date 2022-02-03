@@ -7,5 +7,5 @@
    4. n API that provides a communication interface between the front-end and your data (retrieve, create, delete, update them)
 
    ## how to start it
-   .console.py
+   ./console.py
    

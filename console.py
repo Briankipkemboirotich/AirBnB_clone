@@ -5,8 +5,8 @@ from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
-    """Simple command processor example."""
-    intro = 'Welcome to the turtle shell.   Type help or ? to list commands.\n'
+    """Class for the command interpreter."""
+
     prompt = '(hbnb) '
 
     def do_create(self, arg):
@@ -63,7 +63,7 @@ class HBNBCommand(cmd.Cmd):
             return
         key = name + "." + id
         try:
-            storage.delete(key)
+            del storage.all()[key]
             storage.save()
         except KeyError:
             print("** no instance found **")
@@ -86,10 +86,9 @@ class HBNBCommand(cmd.Cmd):
     
     def do_update(self,args):
         """ Updates an instance based on the class name and id by adding or updating"""
-        args = args.partition(" ")
-        print(args)
-        if args[0]:
-            c_name = args[0]
+        arr = args.partition(" ")
+        if arr[0]:
+            c_name = arr[0]
         else:
             print("** class name missing **")
             return
@@ -97,29 +96,44 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        args = args[2].partition(" ")
-        if args[0]:
-            c_id = args[0]
+        arr2 = arr[2].partition(" ")
+        if arr2[0]:
+            c_id = arr2[0]
 
         else:  # id not present
             print("** instance id missing **")
             return
         key = c_name + "." + c_id
-
-        if key not in storage.all():
+        if key not in list(storage.all().keys()):
+            print(list(storage.all().keys()))
             print("** no instance found **")
             return
-        
-        
+        attrib= arr2[2].partition(" ")
+        attrib_name = attrib[0]
+        value= attrib[2]
+        if not attrib_name:
+            print("** attribute name missing **")
+            return
+        if not value:
+            print("** value missing **")
+            return 
+        storage._FileStorage__objects[key][attrib_name] = value
+        storage.save()
         
     def do_EOF(self, line):
+        """Handles End Of File character.
+        """
+        print()
         return True
 
-    def do_quit(self, arg):
-        """ Exit the console and commit all changes"""
+    def do_quit(self, line):
+        """Exits the program.
+        """
         return True
 
     def emptyline(self):
+        """Doesn't do anything on ENTER.
+        """
         pass
 
 
