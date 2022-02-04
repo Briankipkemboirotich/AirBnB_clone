@@ -146,11 +146,12 @@ class HBNBCommand(cmd.Cmd):
             if words[0] not in storage.classes():
                 print("** class doesn't exist **")
             else:
-                al = [str(obj) for key, obj in storage.all().items()]
-                print(al)
+                x = [str(obj) for key, obj in storage.all().items()
+                     if type(obj).__name__ == words[0]]
+                print(x)
         else:
-            al = [str(obj) for key, obj in storage.all().items()]
-            print(al)
+            x = [str(obj) for key, obj in storage.all().items()]
+            print(x)
 
     def do_count(self, line):
         """Counts the instances of a class.
